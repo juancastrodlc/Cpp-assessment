@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClientRequest.cpp" />
+    <ClCompile Include="NullMessage.cpp" />
     <ClCompile Include="Queuer.cpp" />
     <ClCompile Include="ServerResponse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientRequest.h" />
     <ClInclude Include="Message.h" />
+    <ClInclude Include="NullMessage.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="ServerResponse.h" />
   </ItemGroup>

@@ -1,12 +1,13 @@
 #pragma once
 #include <iostream>
 #include "Message.h"
+#include "NullMessage.h"
 using namespace std;
 // I'm aware there is a queue structure in the STL, however I am implementing one to showcase what I know of CPP
 int MAX_QUESIZE = 1000;
 
 struct Node {
-	Message& data;
+	Message* data = NULL;
 	Node* next = NULL;
 	Node() {}
 	bool operator==(const Node& other) const
@@ -17,14 +18,14 @@ struct Node {
 
 struct Queue
 {
-	Node* front, * rear;
+	Node* front = NULL, * rear = NULL;
 	int queSize = 0;
 	Queue()
 	{
 		front = rear = NULL;
 	}
 
-	void enqueue(Message& data)
+	void enqueue(Message* data)
 	{
 
 		Node* q;
@@ -62,8 +63,9 @@ struct Queue
 
 	string getFront()
 	{
-		return front->data.toString();
+		return front->data->toString();
 	}
+
 
 	unsigned int getCountClients()
 	{
@@ -72,10 +74,17 @@ struct Queue
 		int result = 0;
 		while (temp->next != NULL)
 		{
-			if (typeid(temp->data).name() == "ClientRequest")
+			string typeName = typeid(*temp->data).name();
+			if (typeName == "class ClientRequest")
 			{
 				result++;
 			}
+			temp = temp->next;
+		}
+		string typeName = typeid(*temp->data).name();
+		if (typeName == "class ClientRequest")
+		{
+			result++;
 		}
 		return result;
 	}
@@ -87,10 +96,17 @@ struct Queue
 		int result = 0;
 		while (temp->next != NULL)
 		{
-			if (typeid(temp->data).name() == "ServerResponse")
+			string typeName = typeid(*temp->data).name();
+			if (typeName == "class ServerResponse")
 			{
 				result++;
 			}
+			temp = temp->next;
+		}
+		string typeName = typeid(*temp->data).name();
+		if (typeName == "class ServerResponse")
+		{
+			result++;
 		}
 		return result;
 	}
