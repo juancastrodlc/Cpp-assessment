@@ -63,52 +63,43 @@ struct Queue
 
 	string getFront()
 	{
+		if (front == NULL)
+		{
+			return string("Queue is empty");
+		}
 		return front->data->toString();
 	}
 
-
-	unsigned int getCountClients()
+	unsigned int getCountByClass(const string& className)
 	{
 		Node* temp;
 		temp = front;
 		int result = 0;
-		while (temp->next != NULL)
-		{
-			string typeName = typeid(*temp->data).name();
-			if (typeName == "class ClientRequest")
-			{
-				result++;
-			}
-			temp = temp->next;
-		}
-		string typeName = typeid(*temp->data).name();
-		if (typeName == "class ClientRequest")
+		string typeName = typeid((*temp->data)).name();
+		if (typeid(*temp->data).name() == className)
 		{
 			result++;
 		}
+		while (temp->next != NULL)
+		{
+			temp = temp->next;
+			typeName = typeid((*temp->data)).name();
+			if (typeName == className)
+			{
+				result++;
+			}
+		}
 		return result;
+	}
+
+	unsigned int getCountClients()
+	{
+		return getCountByClass("class ClientRequest");
 	}
 
 	unsigned int getCountServers()
 	{
-		Node* temp;
-		temp = front;
-		int result = 0;
-		while (temp->next != NULL)
-		{
-			string typeName = typeid(*temp->data).name();
-			if (typeName == "class ServerResponse")
-			{
-				result++;
-			}
-			temp = temp->next;
-		}
-		string typeName = typeid(*temp->data).name();
-		if (typeName == "class ServerResponse")
-		{
-			result++;
-		}
-		return result;
+		return getCountByClass("class ServerResponse");
 	}
 };
 

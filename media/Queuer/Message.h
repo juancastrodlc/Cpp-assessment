@@ -14,7 +14,7 @@ public:
 	virtual bool checkMessageLength(string& messageId)
 	{
 		int len = messageId.length();
-		return 1 <= len <= 50;
+		return 1 <= len && len <= 50;
 	}
 	virtual string toString() = 0;
 };
