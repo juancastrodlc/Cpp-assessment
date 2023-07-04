@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClientRequest.cpp" />
-    <ClCompile Include="NullMessage.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Queuer.cpp" />
     <ClCompile Include="ServerResponse.cpp" />
   </ItemGroup>
